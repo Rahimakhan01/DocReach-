@@ -5,6 +5,7 @@ export type User = {
   email: string;
   name: string;
   role: 'user' | 'doctor';
+  specialty?: string; // Optional field for doctors
 };
 
 export type AuthState = {
@@ -15,25 +16,6 @@ export type AuthState = {
 type AuthContextType = AuthState & {
   login: (email: string, password: string, role: 'user' | 'doctor') => Promise<boolean>;
   logout: () => void;
-};
-
-// Dummy user data for demonstration
-export const dummyUsers = {
-  user: {
-    id: '1',
-    email: 'user@example.com',
-    password: 'password123',
-    name: 'John Doe',
-    role: 'user' as const,
-  },
-  doctor: {
-    id: '2',
-    email: 'doctor@example.com',
-    password: 'password123',
-    name: 'Dr. Jane Smith',
-    role: 'doctor' as const,
-    specialty: 'Cardiologist',
-  },
 };
 
 const AuthContext = createContext<AuthContextType>({
@@ -52,22 +34,32 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   });
 
   const login = async (email: string, password: string, role: 'user' | 'doctor') => {
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 500));
+    try {
+      const response = await fetch('http://localhost:5000/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password, role }),
+      });
 
-    const dummyUser = role === 'user' ? dummyUsers.user : dummyUsers.doctor;
-
-    if (email === dummyUser.email && password === dummyUser.password) {
-      const { password: _, ...user } = dummyUser;
-      setState({ user, isAuthenticated: true });
-      return true;
+      if (response.ok) {
+        const data = await response.json();
+        setState({ user: data.user, isAuthenticated: true });
+        localStorage.setItem('token', data.token); // Store token in localStorage
+        return true;
+      } else {
+        return false;
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      return false;
     }
-
-    return false;
   };
 
   const logout = () => {
     setState({ user: null, isAuthenticated: false });
+    localStorage.removeItem('token'); // Clear token from localStorage
   };
 
   const contextValue: AuthContextType = {
