@@ -30,9 +30,26 @@ export function SignupPage() {
     }
 
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      navigate("/login");
+      const response = await fetch('http://localhost:5000/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          password: formData.password,
+          role: role,
+          specialty: role === "doctor" ? formData.specialty : "", // Send specialty only for doctors
+        }),
+      });
+
+      if (response.ok) {
+        navigate("/login");
+      } else {
+        const data = await response.json();
+        setError(data.msg || "An error occurred");
+      }
     } catch (err) {
       setError("An error occurred");
     } finally {
