@@ -18,7 +18,7 @@ export function Navbar() {
           {isAuthenticated ? (
             <>
               <Link to={user?.role === 'doctor' ? '/doctor-dashboard' : '/dashboard'}>
-                <Button variant="ghost" className="flex items-center space-x-2 text-white hover:text-[#5863F8]">
+                <Button variant="ghost" className="flex items-center space-x-2 text-[#00A3FF] hover:text-[#5863F8]">
                   <User className="w-4 h-4" />
                   <span>Dashboard</span>
                 </Button>
@@ -26,7 +26,7 @@ export function Navbar() {
               <Button
                 variant="ghost"
                 onClick={logout}
-                className="flex items-center space-x-2 text-white hover:text-[#5863F8]"
+                className="flex items-center space-x-2 text-[#00A3FF] hover:text-[#5863F8]"
               >
                 Logout
               </Button>
