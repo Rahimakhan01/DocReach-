@@ -7,6 +7,13 @@ import { LoginPage } from './pages/login';
 import { SignupPage } from './pages/signup';
 import { DashboardPage } from './pages/dashboard';
 import { DoctorDashboardPage } from './pages/doctor-dashboard';
+import { BookAppointmentPage } from './pages/bookAppointment';
+import Records  from './pages/records';
+import Tracker  from './pages/tracker';
+import Message  from './pages/message';
+
+
+
 
 function PrivateRoute({ children }: { children: React.ReactNode }) {
   const { isAuthenticated } = useAuth();
@@ -40,6 +47,38 @@ function App() {
                   </PrivateRoute>
                 }
               />
+              <Route
+                path="/bookAppointment"
+                element={
+                  <PrivateRoute>
+                    <BookAppointmentPage />
+                  </PrivateRoute>
+                }
+              />
+            <Route
+                path="/records"
+                element={
+                  <PrivateRoute>
+                    <Records/>
+                  </PrivateRoute>
+                }
+              />
+            <Route
+                path="/message"
+                element={
+                  <PrivateRoute>
+                    <Message />
+                  </PrivateRoute>
+                }
+              />
+            <Route
+                path="/tracker"
+                element={
+                  <PrivateRoute>
+                    <Tracker/>
+                  </PrivateRoute>
+                }
+              />
             </Routes>
           </main>
           <Footer />
@@ -49,4 +88,4 @@ function App() {
   );
 }
 
-export default App
+export default App;

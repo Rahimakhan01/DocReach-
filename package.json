@@ -11,10 +11,11 @@
     "both": "concurrently \"npm run dev\" \"cd docReach-backend && node server.js\""
   },
   "dependencies": {
+    "@shadcn/ui": "^0.0.4",
     "axios": "^1.7.9",
     "clsx": "^2.1.0",
     "dotenv": "^16.4.7",
-    "framer-motion": "^11.0.8",
+    "framer-motion": "^11.18.2",
     "lucide-react": "^0.344.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

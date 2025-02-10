@@ -1,56 +1,65 @@
-import { motion } from 'framer-motion';
-import { Activity, Calendar, FileText, MessageSquare, LineChart as ChartLine, Bell, Settings } from 'lucide-react';
-import { useAuth } from '@/lib/auth';
-import { Button } from '@/components/ui/button';
-import { Tabs } from '@/components/ui/tabs';
+import { motion } from "framer-motion";
+import {
+  Activity,
+  Calendar,
+  FileText,
+  MessageSquare,
+  LineChart as ChartLine,
+  Bell,
+  Settings,
+} from "lucide-react";
+import { useAuth } from "@/lib/auth";
+import { Button } from "@/components/ui/button";
+import { Tabs } from "@/components/ui/tabs";
+import { Link } from "react-router-dom";
 
 const appointments = [
   {
     id: 1,
-    doctor: 'Dr. Jane Smith',
-    date: '2024-03-20',
-    time: '10:00 AM',
-    type: 'Check-up',
+    doctor: "Dr. Jane Smith",
+    date: "2024-03-20",
+    time: "10:00 AM",
+    type: "Check-up",
   },
   {
     id: 2,
-    doctor: 'Dr. Michael Johnson',
-    date: '2024-03-25',
-    time: '2:30 PM',
-    type: 'Follow-up',
+    doctor: "Dr. Michael Johnson",
+    date: "2024-03-25",
+    time: "2:30 PM",
+    type: "Follow-up",
   },
 ];
 
 const healthMetrics = [
   {
-    label: 'Heart Rate',
-    value: '72 bpm',
-    trend: 'stable',
+    label: "Heart Rate",
+    value: "72 bpm",
+    trend: "stable",
   },
   {
-    label: 'Blood Pressure',
-    value: '120/80',
-    trend: 'normal',
+    label: "Blood Pressure",
+    value: "120/80",
+    trend: "normal",
   },
   {
-    label: 'Weight',
-    value: '70 kg',
-    trend: 'stable',
+    label: "Weight",
+    value: "70 kg",
+    trend: "stable",
   },
 ];
 
 const notifications = [
   {
     id: 1,
-    title: 'Appointment Reminder',
-    message: 'Your appointment with Dr. Jane Smith is tomorrow at 10:00 AM',
-    time: '1 hour ago',
+    title: "Appointment Reminder",
+    message: "Your appointment with Dr. Jane Smith is tomorrow at 10:00 AM",
+    time: "1 hour ago",
   },
   {
     id: 2,
-    title: 'New Message',
-    message: 'Dr. Michael Johnson sent you a message',
-    time: '2 hours ago',
+    title: "New Message",
+    message: "Dr. Michael Johnson sent you a message",
+    time: "2 hours ago",
   },
 ];
 
@@ -58,10 +67,26 @@ export function DashboardPage() {
   const { user } = useAuth();
 
   const dashboardTabs = [
-    { id: 'overview', label: 'Overview', icon: <ChartLine className="w-4 h-4" /> },
-    { id: 'appointments', label: 'Appointments', icon: <Calendar className="w-4 h-4" /> },
-    { id: 'notifications', label: 'Notifications', icon: <Bell className="w-4 h-4" /> },
-    { id: 'settings', label: 'Settings', icon: <Settings className="w-4 h-4" /> },
+    {
+      id: "overview",
+      label: "Overview",
+      icon: <ChartLine className="w-4 h-4" />,
+    },
+    {
+      id: "appointments",
+      label: "Appointments",
+      icon: <Calendar className="w-4 h-4" />,
+    },
+    {
+      id: "notifications",
+      label: "Notifications",
+      icon: <Bell className="w-4 h-4" />,
+    },
+    {
+      id: "settings",
+      label: "Settings",
+      icon: <Settings className="w-4 h-4" />,
+    },
   ];
 
   return (
@@ -87,11 +112,15 @@ export function DashboardPage() {
                   key={metric.label}
                   className="bg-white rounded-lg shadow p-6"
                 >
-                  <h3 className="text-lg font-medium text-gray-900">{metric.label}</h3>
+                  <h3 className="text-lg font-medium text-gray-900">
+                    {metric.label}
+                  </h3>
                   <p className="mt-2 text-3xl font-semibold text-teal-600">
                     {metric.value}
                   </p>
-                  <p className="mt-1 text-sm text-gray-500">Status: {metric.trend}</p>
+                  <p className="mt-1 text-sm text-gray-500">
+                    Status: {metric.trend}
+                  </p>
                 </div>
               ))}
             </div>
@@ -100,13 +129,16 @@ export function DashboardPage() {
               <div className="bg-white rounded-lg shadow p-6">
                 <h2 className="text-xl font-semibold mb-4">Quick Actions</h2>
                 <div className="grid grid-cols-2 gap-4">
-                  <Button
-                    variant="outline"
-                    className="h-24 flex flex-col items-center justify-center"
-                  >
-                    <Calendar className="h-6 w-6 mb-2" />
-                    Book Appointment
-                  </Button>
+                  <Link to="/bookAppointment">
+                    <Button
+                      variant="outline"
+                      className="h-24 flex flex-col items-center justify-center"
+                    >
+                      <Calendar className="h-6 w-6 mb-2" />
+                      Book Appointment
+                    </Button>
+                  </Link>
+                  <Link to="/message">
                   <Button
                     variant="outline"
                     className="h-24 flex flex-col items-center justify-center"
@@ -114,6 +146,8 @@ export function DashboardPage() {
                     <MessageSquare className="h-6 w-6 mb-2" />
                     Message Doctor
                   </Button>
+                  </Link>
+                  <Link to="/tracker">
                   <Button
                     variant="outline"
                     className="h-24 flex flex-col items-center justify-center"
@@ -121,6 +155,8 @@ export function DashboardPage() {
                     <Activity className="h-6 w-6 mb-2" />
                     Track Symptoms
                   </Button>
+                  </Link>
+                  <Link to="/records">
                   <Button
                     variant="outline"
                     className="h-24 flex flex-col items-center justify-center"
@@ -128,6 +164,7 @@ export function DashboardPage() {
                     <FileText className="h-6 w-6 mb-2" />
                     View Records
                   </Button>
+                  </Link>
                 </div>
               </div>
 
@@ -140,7 +177,9 @@ export function DashboardPage() {
                   </div>
                   <div className="border-l-4 border-teal-500 pl-4">
                     <p className="text-sm text-gray-600">Yesterday</p>
-                    <p className="font-medium">Booked appointment with Dr. Smith</p>
+                    <p className="font-medium">
+                      Booked appointment with Dr. Smith
+                    </p>
                   </div>
                 </div>
               </div>
@@ -152,10 +191,12 @@ export function DashboardPage() {
             <div className="p-6">
               <div className="flex justify-between items-center mb-6">
                 <h2 className="text-xl font-semibold">Upcoming Appointments</h2>
+                <Link to="/bookAppointment">
                 <Button>
                   <Calendar className="w-4 h-4 mr-2" />
                   New Appointment
                 </Button>
+                </Link>
               </div>
               <div className="space-y-4">
                 {appointments.map((appointment) => (
@@ -166,7 +207,9 @@ export function DashboardPage() {
                     <div className="flex justify-between items-start">
                       <div>
                         <h3 className="font-medium">{appointment.doctor}</h3>
-                        <p className="text-sm text-gray-500">{appointment.type}</p>
+                        <p className="text-sm text-gray-500">
+                          {appointment.type}
+                        </p>
                         <p className="text-sm text-gray-500">
                           {appointment.date} at {appointment.time}
                         </p>
@@ -193,7 +236,9 @@ export function DashboardPage() {
                   >
                     <div className="flex justify-between">
                       <h3 className="font-medium">{notification.title}</h3>
-                      <span className="text-sm text-gray-500">{notification.time}</span>
+                      <span className="text-sm text-gray-500">
+                        {notification.time}
+                      </span>
                     </div>
                     <p className="text-gray-600 mt-1">{notification.message}</p>
                   </div>
@@ -208,10 +253,14 @@ export function DashboardPage() {
               <h2 className="text-xl font-semibold mb-6">Account Settings</h2>
               <div className="space-y-6">
                 <div>
-                  <h3 className="text-lg font-medium mb-4">Profile Information</h3>
+                  <h3 className="text-lg font-medium mb-4">
+                    Profile Information
+                  </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700">Name</label>
+                      <label className="block text-sm font-medium text-gray-700">
+                        Name
+                      </label>
                       <input
                         type="text"
                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500"
@@ -220,7 +269,9 @@ export function DashboardPage() {
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700">Email</label>
+                      <label className="block text-sm font-medium text-gray-700">
+                        Email
+                      </label>
                       <input
                         type="email"
                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500"
@@ -237,14 +288,18 @@ export function DashboardPage() {
                     <div className="flex items-center justify-between">
                       <div>
                         <h4 className="font-medium">Email Notifications</h4>
-                        <p className="text-sm text-gray-500">Receive email updates about your appointments</p>
+                        <p className="text-sm text-gray-500">
+                          Receive email updates about your appointments
+                        </p>
                       </div>
                       <Button variant="outline">Configure</Button>
                     </div>
                     <div className="flex items-center justify-between">
                       <div>
                         <h4 className="font-medium">Time Zone</h4>
-                        <p className="text-sm text-gray-500">Set your local time zone for accurate scheduling</p>
+                        <p className="text-sm text-gray-500">
+                          Set your local time zone for accurate scheduling
+                        </p>
                       </div>
                       <Button variant="outline">Update</Button>
                     </div>
