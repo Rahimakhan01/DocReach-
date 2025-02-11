@@ -14,7 +14,7 @@ const Message = () => {
 
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-bold">Chat with Doctor</h1>
+      <h1 className="text-2xl font-bold">Chat with Doctor!</h1>
       <div className="h-96 overflow-y-auto border p-4 mt-4 rounded">
         {messages.map((msg, idx) => (
           <div
