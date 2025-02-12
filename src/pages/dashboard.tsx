@@ -110,7 +110,7 @@ export function DashboardPage() {
               {healthMetrics.map((metric) => (
                 <div
                   key={metric.label}
-                  className="bg-white rounded-lg shadow p-6"
+                  className="bg-[#dff7ff]  rounded-lg shadow p-6"
                 >
                   <h3 className="text-lg font-medium text-gray-900">
                     {metric.label}
@@ -124,15 +124,15 @@ export function DashboardPage() {
                 </div>
               ))}
             </div>
-
+          
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <div className="bg-white rounded-lg shadow p-6">
-                <h2 className="text-xl font-semibold mb-4">Quick Actions</h2>
+              <div className="bg-[#dff7ff]   rounded-lg shadow p-6 ">
+                <h2 className="text-xl  font-semibold mb-4">Quick Actions</h2>
                 <div className="grid grid-cols-2 gap-4">
                   <Link to="/bookAppointment">
                     <Button
                       variant="outline"
-                      className="h-24 flex flex-col items-center justify-center"
+                      className="h-24 flex flex-col items-center justify-center hover:border-[#16BAC5] hover:text-[#16BAC5]"
                     >
                       <Calendar className="h-6 w-6 mb-2" />
                       Book Appointment
@@ -141,7 +141,7 @@ export function DashboardPage() {
                   <Link to="/message">
                   <Button
                     variant="outline"
-                    className="h-24 flex flex-col items-center justify-center"
+                    className="h-24 flex flex-col items-center justify-center hover:border-[#16BAC5] hover:text-[#16BAC5]"
                   >
                     <MessageSquare className="h-6 w-6 mb-2" />
                     Message Doctor
@@ -150,7 +150,7 @@ export function DashboardPage() {
                   <Link to="/tracker">
                   <Button
                     variant="outline"
-                    className="h-24 flex flex-col items-center justify-center"
+                    className="h-24 flex flex-col items-center justify-center hover:border-[#16BAC5] hover:text-[#16BAC5]"
                   >
                     <Activity className="h-6 w-6 mb-2" />
                     Track Symptoms
@@ -159,7 +159,7 @@ export function DashboardPage() {
                   <Link to="/records">
                   <Button
                     variant="outline"
-                    className="h-24 flex flex-col items-center justify-center"
+                    className="h-24 flex flex-col items-center justify-center hover:border-[#16BAC5] hover:text-[#16BAC5]"
                   >
                     <FileText className="h-6 w-6 mb-2" />
                     View Records
@@ -168,7 +168,7 @@ export function DashboardPage() {
                 </div>
               </div>
 
-              <div className="bg-white rounded-lg shadow p-6">
+              <div className="bg-[#dff7ff]  rounded-lg shadow p-6">
                 <h2 className="text-xl font-semibold mb-4">Recent Activity</h2>
                 <div className="space-y-4">
                   <div className="border-l-4 border-teal-500 pl-4">
