@@ -2,6 +2,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
+const geminiRoutes = require("./routes/geminiRoutes");
+
 
 dotenv.config();
 
@@ -18,6 +20,7 @@ mongoose.connect(process.env.MONGO_URI)
 
 // Routes
 app.use("/api/auth", require("./routes/authRoutes"));
+app.use("/api", geminiRoutes); // gemini Route
 app.use("/api/protected", require("./routes/protected")); // Protected Route
 app.use("/api/profile", require("./routes/profile"));
 
